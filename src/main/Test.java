@@ -7,11 +7,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.SchemaFactory;
-import org.nssd.JElem;
+//import org.nssd.JElem;
 
 public class Test {
 	public static void main(String[] args) {
-		JAXBContext context;
+		/*JAXBContext context;
 		try {
 			context = JAXBContext.newInstance(JElem.class);
 
@@ -25,6 +25,6 @@ public class Test {
 			JElem jElem = root.getValue();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
