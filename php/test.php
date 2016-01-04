@@ -10,18 +10,27 @@ $file_name = $file_dir.'address.xsd';
 $doc = new DOMDocument();
 
 $doc->load($file_name);
-$child = $doc->childNodes;
 
 //walk_xml($doc, 0);
 
-$arr = xml_to_tree($doc);
+$doc2 = new DOMDocument();
 
-$node = new StructNode();
-dump($arr);
+$doc2->load($file_dir.'address.xsd');
+
+$global_var = 0;
+
+$arr1 = xml_to_tree($doc);
+
+$arr2 = xml_to_tree($doc2);
+
+//dump($arr1);
+
+$result = match($arr1, $arr2);
 
 
+dump("global_var:".$global_var);
+$debug = debug($arr1, $arr2);
+echo '$debug='.$debug;
 
-
-
-
+dump("相似度为：".$result);
 

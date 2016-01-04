@@ -1,18 +1,18 @@
-xml version="1.0"?>
+<?xml version="1.0"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:element name="order">
   <xsd:complexType>
   <xsd:sequence>
     <xsd:element ref="orderItem" maxOccurs="10" />
-  xsd:sequence>
-  xsd:complexType>
-xsd:element>
+  </xsd:sequence>
+  </xsd:complexType>
+</xsd:element>
 <xsd:element name="orderItem">
   <xsd:complexType>
   <xsd:choice>
     <xsd:element name="name" type="xsd:string"/>
     <xsd:element name="id" type="xsd:string"/>
-  xsd:choice>
-  xsd:complexType>
-xsd:element>
-xsd:schema>
+  </xsd:choice>
+  </xsd:complexType>
+</xsd:element>
+</xsd:schema>
