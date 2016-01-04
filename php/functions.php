@@ -22,7 +22,13 @@ function autoload($class) {
     }
 }
 
-//从某节点开始向下遍历遍历XML文档所有节点的方法
+/**
+ *从某节点开始向下遍历遍历XML文档所有节点的方法
+ *@param DOMDocument $node
+ *@param int $depth
+ *@param StructNode $arr
+ *@return StructNode
+ */
 function walk_xml($node, $depth, $arr) {
 	for ($i = 0, $indent = ''; $i < $depth; $i++)
 		$indent .= '   ';
@@ -32,7 +38,6 @@ function walk_xml($node, $depth, $arr) {
         $arr->xmlTagName = $node->getAttribute("name");//设置对应xml的标签名
         $arr->xmlTagType = $node->getAttribute("type");//设置对应xml的标签属性
 	}
-
 	$children = $node->childNodes;
 	if(isset($children->length)){
 		$children_count = $children->length;
@@ -50,6 +55,11 @@ function walk_xml($node, $depth, $arr) {
 	return $arr;
 }
 
+/**
+ *把dom树转为自定义的树结构
+ *@param DOMDocument $node
+ *@return StructNode
+ */
 function xml_to_tree($node) {
 	$root = new StructNode();//辅助根节点
 	$root = walk_xml($node, 0, $root);
@@ -71,7 +81,12 @@ function fidder_to_root_node($node) {
     return null;//找不到xml文件的root节点
 }
 
-//用路径匹配算法计算节点相似度
+/**
+ *用路径匹配算法计算节点相似度
+ *@param StructNode $tree1
+ *@param StructNode $tree2
+ *@return float
+ */
 function match($tree1, $tree2) {
     //获取两棵树儿子个数
     $tree1_children_count = count($tree1->children_list);
@@ -88,17 +103,32 @@ function match($tree1, $tree2) {
     return $sim;
 }
 
-//计算两个节点名称相似度
+/**
+ *计算两个节点名称相似度
+ *@param StructNode $node1
+ *@param StructNode $node2
+ *@return int
+ */
 function Lmatch($node1, $node2) {
     return $node1->xmlTagName == $node2->xmlTagName ? 1 : 0;
 }
 
-//计算两个节点属性相似度
+/**
+ *计算两个节点属性相似度
+ *@param StructNode $node1
+ *@param StructNode $node2
+ *@return int
+ */
 function Pmatch($node1, $node2) {
     return $node1->xmlTagType == $node2->xmlTagType ? 1 : 0;
 }
 
-//计算节点下面所有孩子节点的相似度，其中用到match函数，两个函数相互调用,要保证两个节点都有字节点
+/**
+ *计算节点下面所有孩子节点的相似度，其中用到match函数，两个函数相互调用,要保证两个节点都有字节点
+ *@param StructNode $tree1
+ *@param StructNode $tree2
+ *@return float
+ */
 function childMatch($tree1, $tree2) {
     $nMatch = 0;//匹配的路径数
     $max = 0;
