@@ -15,7 +15,7 @@ $doc->load($file_name);
 
 $doc2 = new DOMDocument();
 
-$doc2->load($file_dir.'address.xsd');
+$doc2->load($file_dir.'order.xsd');
 
 $global_var = 0;
 
