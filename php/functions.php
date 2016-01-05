@@ -67,7 +67,11 @@ function xml_to_tree($node) {
     return $root;
 }
 
-//过滤xsd节点，获取对应xml的root节点
+/**
+ *过滤xsd节点，获取对应xml的root节点
+ *@param StructNode $node
+ *@return StructNode
+ */
 function fidder_to_root_node($node) {
     if(!empty($node->xmlTagName)) {
         return $node;
@@ -124,7 +128,7 @@ function Pmatch($node1, $node2) {
 }
 
 /**
- *计算节点下面所有孩子节点的相似度，其中用到match函数，两个函数相互调用,要保证两个节点都有字节点
+ *计算节点下面所有孩子节点的相似度，其中用到match函数，两个函数相互调用，调用childMatch($tree1, $tree2)时要保证两个节点都有子节点
  *@param StructNode $tree1
  *@param StructNode $tree2
  *@return float
