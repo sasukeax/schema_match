@@ -8,8 +8,8 @@ ini_set ('xdebug.var_display_max_depth', 50);
 spl_autoload_register('autoload');
 
 //设置schema匹配一致性系数
-define('MATCH_W1',0.6);     //名称相似度系数
-define('MATCH_W2',0.3);     //属性相似度系数
+define('MATCH_W1',0.7);     //名称相似度系数
+define('MATCH_W2',0.2);     //属性相似度系数
 define('MATCH_W3',0.1);     //儿子相似度系数
 define('MATCH_W4',0.001);   //路径相似度系数
 
