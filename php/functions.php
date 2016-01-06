@@ -61,9 +61,9 @@ function walk_xml($node, $depth, $arr) {
  *@return StructNode
  */
 function xml_to_tree($node) {
-	$root = new StructNode();//辅助根节点
+	$root = new StructNode();//辅助根节点,不是对应xml文件的根节点，需过滤
 	$root = walk_xml($node, 0, $root);
-    $root = fidder_to_root_node($root);
+    $root = fidder_to_root_node($root);//获取对应xml文件的根节点
     return $root;
 }
 
@@ -108,13 +108,20 @@ function match($tree1, $tree2) {
 }
 
 /**
- *计算两个节点名称相似度
+ *计算两个节点名称相似度,一个是xsd中标签名，一个是xml中的标签名
  *@param StructNode $node1
  *@param StructNode $node2
  *@return int
  */
 function Lmatch($node1, $node2) {
-    return $node1->xmlTagName == $node2->xmlTagName ? 1 : 0;
+    $name_sim = 0;
+    if($node1->xmlTagName == $node2->xmlTagName) {
+        $name_sim += 1;
+    }
+    if($node1->tagName != $node2->tagName) {//若xsd中标签名不一致，则匹配减半
+        $name_sim /= 2;
+    }
+    return $name_sim;
 }
 
 /**
