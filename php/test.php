@@ -5,7 +5,7 @@ require dirname(__FILE__).'/functions.php';
 $file_dir = dirname(dirname(__FILE__)).'/xsd/';
 
 $file_name1 = $file_dir.'address.xsd';
-$file_name2 = $file_dir.'order.xsd';
+$file_name2 = $file_dir.'address2.xsd';
 
 // 首先要建一个DOMDocument对象 
 $doc1 = new DOMDocument();

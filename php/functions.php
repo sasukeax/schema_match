@@ -95,7 +95,9 @@ function match($tree1, $tree2) {
     //获取两棵树儿子个数
     $tree1_children_count = count($tree1->children_list);
     $tree2_children_count = count($tree2->children_list);
-    if($tree1_children_count == 0 && $tree2_children_count == 0) {//如果两个节点都是叶节点
+    if(isSameTree($tree1, $tree2)) {
+        $sim = MATCH_W1 * Lmatch($tree1, $tree2) + MATCH_W2 * Pmatch($tree1, $tree2) + MATCH_W3;;
+    }else if($tree1_children_count == 0 && $tree2_children_count == 0) {//如果两个节点都是叶节点
         $sim = MATCH_W1 * Lmatch($tree1, $tree2) + MATCH_W2 * Pmatch($tree1, $tree2) + MATCH_W3;
     }else if(($tree1_children_count != 0 && $tree2_children_count == 0) || ($tree1_children_count == 0 && $tree2_children_count != 0)) {
         //如果两个节点一个是叶节点，一个不是
@@ -163,3 +165,34 @@ function childMatch($tree1, $tree2) {
     $w2 = $nMatch / (count($tree2->children_list) + count($tree1->children_list));
     return ($w1 + $w2) / 2;
 }
+
+function isSameTree($tree1, $tree2) {
+    //获取两棵树儿子个数
+    $tree1_children_count = count($tree1->children_list);
+    $tree2_children_count = count($tree2->children_list);
+    if($tree1_children_count == 0 && $tree2_children_count == 0) {//如果两个节点都是叶节点
+        if($tree1->tagName != $tree2->tagName || $tree1->xmlTagName != $tree2->xmlTagName || $tree1->xmlTagType != $tree2->xmlTagType) {
+            return false;
+        }else {
+            return true;
+        }
+    }else if(($tree1_children_count != 0 && $tree2_children_count == 0) || ($tree1_children_count == 0 && $tree2_children_count != 0)) {
+        //如果两个节点一个是叶节点，一个不是
+        return false;
+    }else {
+        if($tree1_children_count != $tree2_children_count) {
+            return false;
+        }else {
+            $flag = true;
+            for($i = 0; $i < $tree2_children_count;$i++) {
+                if(!isSameTree($tree1->children_list[$i], $tree2->children_list[$i])) {
+                    $flag = false;
+                    break;
+                }
+            }
+            return $flag;
+        }
+    }
+    return true;
+}
+
